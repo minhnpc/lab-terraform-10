@@ -11,6 +11,5 @@ variable "instance_attr" {
     ami      = string
     type     = string
     key_name = string
-
   }))
 }
