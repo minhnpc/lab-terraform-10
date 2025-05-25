@@ -34,12 +34,6 @@ module "vpc" {
   route_cidr_block = var.route_cidr_block
 }
 
-# resource "aws_vpc" "vpc10" {
-#   cidr_block = "10.${local.num}.0.0/16"
-#   tags = {
-#     Name = "${local.env}-vpc"
-#   }
-# }
 
 module "subnets" {
   source = "./modules/subnets"
@@ -47,44 +41,6 @@ module "subnets" {
   env    = local.env
   vpc_id = module.vpc.vpc_id
 }
-
-
-# resource "aws_subnet" "subnet10" {
-#   vpc_id                  = module.vpc.vpc_id
-#   availability_zone       = count.index + 1 <= 2 ? "ap-southeast-1a" : "ap-southeast-1b"
-#   count                   = 4
-#   map_public_ip_on_launch = (count.index + 1) % 2 == 1 ? false : true
-
-#   cidr_block = "10.${local.num}.${count.index + 1}.0/24"
-
-#   tags = {
-#     key   = "environment"
-#     value = "${local.env}"
-#     Name  = "${local.env}-${(count.index + 1) % 2 == 1 ? "private" : "public"}-subnet"
-#   }
-
-# }
-
-# resource "aws_internet_gateway" "igw10" {
-#   vpc_id = aws_vpc.vpc10.id
-
-#   tags = {
-#     Name = "${local.env}-igw"
-#   }
-
-# }
-
-# resource "aws_route_table" "rt10" {
-#   vpc_id = aws_vpc.vpc10.id
-#   route {
-#     cidr_block = var.route_cidr_block
-#     gateway_id = aws_internet_gateway.igw10.id
-#   }
-
-#   tags = {
-#     Name = "${local.env}-route-table"
-#   }
-# }
 
 resource "aws_route_table_association" "rta10_1" {
   route_table_id = module.vpc.rt10_id
@@ -231,7 +187,7 @@ resource "aws_autoscaling_group" "autoScalingGr_public" {
   max_size            = 3
   min_size            = 1
   desired_capacity    = 2
-  vpc_zone_identifier = [module.subnets.subnet_id[1].id, module.subnets.subnet_id[3]]
+  vpc_zone_identifier = [module.subnets.subnet_id[1], module.subnets.subnet_id[3]]
   launch_template {
     id      = aws_launch_template.launch_template10.id
     version = "$Latest"

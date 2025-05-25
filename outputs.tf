@@ -3,7 +3,7 @@ output "VPC" {
 }
 
 output "subnets" {
-  value = [for s in aws_subnet.subnet10 :
+  value = [for s in module.subnets.subnet_infos :
     "${s.tags.Name} : ${s.cidr_block}: ${s.id}"
   ]
 }
