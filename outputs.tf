@@ -1,9 +1,20 @@
 output "VPC" {
-  value = "${aws_vpc.vpc10.tags.Name} : ${aws_vpc.vpc10.cidr_block}"
+  value = module.vpc.vpc
 }
 
 output "subnets" {
   value = [for s in aws_subnet.subnet10 :
-    "${s.tags.Name} : ${s.cidr_block}"
+    "${s.tags.Name} : ${s.cidr_block}: ${s.id}"
   ]
 }
+
+# output "instances" {
+#   value = [for s in aws_autoscaling_group.autoScalingGr :
+#     "Name: ${s.tags.Name} - public IP: ${s.public_ip} "
+#   ]
+# }
+
+# output "autoscaling_group_name" {
+#   value = [for s in aws_autoscaling_group.autoScalingGr :
+#   "Name : ${s.name}"]
+# }

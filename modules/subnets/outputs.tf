@@ -1,0 +1,3 @@
+output "subnet_id" {
+  value = [for s in aws_subnet.subnet10 : s.id]
+}
