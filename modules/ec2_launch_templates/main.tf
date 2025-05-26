@@ -4,4 +4,5 @@ resource "aws_launch_template" "launch_template10" {
   instance_type          = var.instance_attr.type
   key_name               = var.instance_attr.key_name
   vpc_security_group_ids = [var.security_group_public_id]
+  user_data              = base64encode(join("\n", var.user_data))
 }

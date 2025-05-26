@@ -37,4 +37,4 @@ override.tf.json
 terraform.rc
 
 #ignore inputs file
-inputs.tf
+#inputs.tf

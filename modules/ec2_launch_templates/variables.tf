@@ -13,3 +13,9 @@ variable "env" {
 variable "security_group_public_id" {
   type = string
 }
+
+variable "user_data" {
+  type = list(string)
+}
+
+

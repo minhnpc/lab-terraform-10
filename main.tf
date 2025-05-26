@@ -59,6 +59,7 @@ module "ec2_launch_templates" {
   instance_attr            = var.instance_attr[local.env]
   env                      = local.env
   security_group_public_id = module.security_groups.security_group_public_id
+  user_data                = var.user_data[local.env]
 }
 
 module "autoscaling_group" {

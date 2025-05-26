@@ -8,6 +8,10 @@ output "subnets" {
   ]
 }
 
+output "dns_name" {
+  value = module.alb.alb_dns_name
+}
+
 # output "instances" {
 #   value = [for s in aws_autoscaling_group.autoScalingGr :
 #     "Name: ${s.tags.Name} - public IP: ${s.public_ip} "

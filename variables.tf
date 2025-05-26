@@ -13,3 +13,16 @@ variable "instance_attr" {
     key_name = string
   }))
 }
+
+variable "user_data" {
+  type = map(list(string))
+}
+
+# variable "ssh_infos" {
+#   type = map(object({
+#     ssh_key_dir = string
+#     user        = string
+#     type        = string
+#     host        = string
+#   }))
+# }
