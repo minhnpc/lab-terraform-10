@@ -24,6 +24,9 @@ jobs:
       with:
         terraform_version: 1.11.2
 
+    - name: Select Terraform Workspace
+      run: terraform workspace new dev
+
     - name: Terraform Init
       run: terraform init
       env:
